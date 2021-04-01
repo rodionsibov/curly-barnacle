@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-wrap w-full relative">
-    <div class="w-full absolute" v-for="(color, index) in sliders" :key="color">
+    <div class="w-full absolute overflow-hidden" v-for="(color, index) in sliders" :key="color">
       <transition name="fade">
         <div
           v-if="currentSlide === index"
@@ -16,7 +16,7 @@
           :key="slider"
           @click="makeActiv(index)"
           :class="currentSlide === index ? 'bg-gray-700' : 'bg-gray-300'"
-          class="w-4 h-4 rounded-full mx-2 cursor-pointer"
+          class="w-4 h-4 rounded-full mx-2 cursor-pointer shadow-md"
         ></div>
       </div>
     </div>
@@ -34,8 +34,8 @@ export default {
     };
   },
   methods: {
-    makeActiv() {
-        
+    makeActiv(index) {
+        this.currentSlide = index
     },
   },
   mounted() {

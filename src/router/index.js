@@ -17,14 +17,14 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/Calendar.vue')
   },
-{
-  path: '/markdown',
-  component: ()=> import('../views/Markdown.vue')
-},
-{
-  path: '/slider',
-  component: ()=> import('../views/Slider.vue')
-}
+  {
+    path: '/markdown',
+    component: () => import('../views/Markdown.vue')
+  },
+  {
+    path: '/slider',
+    component: () => import('../views/Slider.vue')
+  }
 ]
 
 const router = createRouter({

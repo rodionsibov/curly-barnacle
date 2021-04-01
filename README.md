@@ -1,4 +1,4 @@
-# vue3-tut
+# curly-barnacle
 
 ## Project setup
 ```
