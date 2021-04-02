@@ -1,5 +1,5 @@
 <template>
-  <app-header @open-login-modal="isLoginOpen = true" />
+  <app-header :isLoggedIn="isLoggedIn" @open-login-modal="isLoginOpen = true" />
   <div class="w-full flex">
     <router-view />
   </div>
@@ -9,6 +9,7 @@
 <script>
 import AppHeader from "./components/AppHeader.vue";
 import LoginModal from "./components/LoginModal.vue";
+import firebase from "../firebase";
 
 export default {
   components: {
@@ -18,8 +19,20 @@ export default {
   data() {
     return {
       isLoginOpen: false,
+      isLoggedIn: false,
+      authUser: {},
     };
   },
-  
+  mounted() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.isLoggedIn = true;
+        this.authUser = user;
+      } else {
+        this.isLoggedIn = false;
+        this.authUser = {};
+      }
+    });
+  },
 };
 </script>

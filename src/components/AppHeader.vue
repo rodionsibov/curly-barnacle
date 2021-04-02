@@ -10,12 +10,33 @@
       :to="item.to"
       >{{ item.title }}
     </router-link>
-    <button @click="$emit('open-login-modal')" class="hvr-underline-reveal mx-3 align-middle">Login</button>
+    <button
+      v-if="isLoggedIn"
+      @click="logout"
+      class="hvr-underline-reveal mx-3 align-middle"
+    >
+      Logout
+    </button>
+    <button
+      v-else
+      @click="$emit('open-login-modal')"
+      class="hvr-underline-reveal mx-3 align-middle"
+    >
+      Login
+    </button>
   </div>
 </template>
 
 <script>
+import firebase from "../../firebase";
+
 export default {
+  props: {
+    isLoggedIn: {
+      type: Boolean,
+      required: true
+    }
+  },
   data() {
     return {
       list: [
@@ -25,6 +46,20 @@ export default {
         { title: "Slider Carousel", to: "/slider" },
       ],
     };
+  },
+  methods: {
+    logout() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          // Sign-out successful.
+        })
+        .catch((error) => {
+          // An error happened.
+          console.log(error);
+        });
+    },
   },
 };
 </script>

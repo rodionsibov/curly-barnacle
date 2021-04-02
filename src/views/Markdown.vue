@@ -7,6 +7,7 @@
           class="w-full h-full p-3"
           :value="text"
           @input="update"
+          ref="markdownTextArea"
         ></textarea>
       </article>
       <article
@@ -40,6 +41,9 @@ export default {
       this.debounce(task, 500);
     },
   },
+  mounted(){
+    this.$refs.markdownTextArea.focus()
+  }
 };
 </script>
 
