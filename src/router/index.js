@@ -31,6 +31,11 @@ const routes = [
     path: '/slider',
     component: () => import('../views/Slider.vue'),
     meta: {title: 'Slider Carousel'}
+  },
+  {
+    path: '/calculator',
+    component: () => import('../views/Calculator.vue'),
+    meta: {title: 'Calculator'}
   }
 ]
 
