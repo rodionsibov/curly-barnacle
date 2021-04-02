@@ -5,10 +5,13 @@
   ></section>
   <div class="absolute inset-0">
     <div class="flex h-full">
-      <div class="m-auto z-30 bg-white rounded shadow p-2 w-1/3">
+      <div class="m-auto z-30 bg-white rounded shadow p-2">
         <div class="p-2 border">
           <h1 class="text-2xl text-center">Login</h1>
-          <form @submit.prevent="submit" class="p-2 my-2">
+          <google-login @close-login-from-google="close" />
+
+          <p class="text-center">or</p>
+          <form @submit.prevent="submit" class="p-2">
             <div class="my-4">
               <label for="">Email or Username</label>
               <input
@@ -47,7 +50,11 @@
 
 <script>
 import firebase from "../../firebase";
+import GoogleLogin from "./GoogleLogin.vue";
 export default {
+  components: {
+    GoogleLogin
+  },
   data() {
     return {
       email: "vue3user@mail.com",
@@ -57,6 +64,7 @@ export default {
   },
   emits: ["close-login"],
   methods: {
+    
     close() {
       this.$emit("close-login");
     },
@@ -69,7 +77,7 @@ export default {
           this.email = "";
           this.password = "";
           this.isLoading = false;
-          this.close()
+          this.close();
         })
         .catch((err) => {
           console.log(err);
@@ -77,9 +85,9 @@ export default {
         });
     },
   },
-  mounted(){
-    this.$refs.emailRef.focus()
-  }
+  mounted() {
+    this.$refs.emailRef.focus();
+  },
 };
 </script>
 
