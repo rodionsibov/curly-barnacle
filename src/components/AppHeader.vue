@@ -10,6 +10,7 @@
       :to="item.to"
       >{{ item.title }}
     </router-link>
+    <button @click="$emit('open-login-modal')" class="hvr-underline-reveal mx-3 align-middle">Login</button>
   </div>
 </template>
 
@@ -53,5 +54,4 @@ export default {
 .active.hvr-underline-reveal:before {
   transform: translateY(0);
 }
-
 </style>
