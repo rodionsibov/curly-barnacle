@@ -3,11 +3,16 @@
     <div class="m-auto">
       <h1 class="text-2xl mt-5 text-center">Calculator</h1>
       <p
-        class="text-3xl text-right mt-10 mb-2 overflow-x-scroll overflow-y-hidden"
+        class="text-3xl text-right mt-10 overflow-x-scroll overflow-y-hidden"
         style="direction: rtl; width: 172px; height: 50px"
       >
         {{ currentNum }}
       </p>
+      <div class="h-7">
+        <small v-if="selectedOperation"
+          >{{ prevNum }} {{ selectedOperation }} {{ currentNum }}</small
+        >
+      </div>
       <div class="grid grid-cols-4 gap-1">
         <button
           @click="pressed('1')"
@@ -111,19 +116,20 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 export default {
   setup() {
     const currentNum = ref("");
     const prevNum = ref("");
     const operations = ["+", "-", "*", "/"];
+    const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
     const selectedOperation = ref("");
 
     function pressed(value) {
-      if (value === "=") calculate();
+      if (value === "=" || value === 'Enter') calculate();
       else if (value === "c") clear();
       else if (operations.includes(value)) applyOperation(value);
-      else appendNumber(value);
+      else if (numbers.includes(value)) appendNumber(value);
     }
 
     function appendNumber(value) {
@@ -141,6 +147,9 @@ export default {
       else if (selectedOperation.value === "/") divide();
       else if (selectedOperation.value === "-") subtract();
       else if (selectedOperation.value === "+") sum();
+
+      prevNum.value = "";
+      selectedOperation.value = "";
     }
 
     function multiply() {
@@ -162,6 +171,12 @@ export default {
     function clear() {
       currentNum.value = "";
     }
+
+    onMounted(() => {
+      window.addEventListener("keydown", (e) => {
+        pressed(e.key);
+      });
+    });
 
     return { currentNum, pressed, selectedOperation, prevNum };
   },
