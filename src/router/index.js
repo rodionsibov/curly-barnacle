@@ -28,7 +28,7 @@ const routes = [
     meta: {title: 'Markdown'}
   },
   {
-    path: '/slider',
+    path: '/slider-carousel',
     component: () => import('../views/Slider.vue'),
     meta: {title: 'Slider Carousel'}
   },
@@ -36,6 +36,11 @@ const routes = [
     path: '/calculator',
     component: () => import('../views/Calculator.vue'),
     meta: {title: 'Calculator'}
+  },
+  {
+    path: '/reuseable-modal',
+    component: () => import('../views/ReuseableModal.vue'),
+    meta: {title: 'Reuseable Modal'}
   }
 ]
 
