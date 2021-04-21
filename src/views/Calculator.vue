@@ -115,8 +115,8 @@ import { ref } from "vue";
 export default {
   setup() {
     const currentNum = ref("");
-    const operations = ["+", "-", "*", "/"];
     const prevNum = ref("");
+    const operations = ["+", "-", "*", "/"];
     const selectedOperation = ref("");
 
     function pressed(value) {
@@ -133,16 +133,37 @@ export default {
     function applyOperation(value) {
       prevNum.value = currentNum.value;
       currentNum.value = "";
-      selectedOperation.value = value
+      selectedOperation.value = value;
     }
 
-    function calculate() {}
+    function calculate() {
+      if (selectedOperation.value === "*") multiply();
+      else if (selectedOperation.value === "/") divide();
+      else if (selectedOperation.value === "-") subtract();
+      else if (selectedOperation.value === "+") sum();
+    }
+
+    function multiply() {
+      currentNum.value = prevNum.value * currentNum.value;
+    }
+
+    function divide() {
+      currentNum.value = prevNum.value / currentNum.value;
+    }
+
+    function subtract() {
+      currentNum.value = prevNum.value - currentNum.value;
+    }
+
+    function sum() {
+      currentNum.value = +prevNum.value + +currentNum.value;
+    }
 
     function clear() {
       currentNum.value = "";
     }
 
-    return { currentNum, pressed };
+    return { currentNum, pressed, selectedOperation, prevNum };
   },
 };
 </script>
