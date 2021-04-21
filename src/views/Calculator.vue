@@ -116,7 +116,8 @@
 </template>
 
 <script>
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref } from "vue";
+import useWindowEvent from "../useWindowEvent";
 export default {
   setup() {
     const currentNum = ref("");
@@ -178,8 +179,7 @@ export default {
       console.log(e.key);
     }
 
-    onMounted(() => window.addEventListener("keydown", handleKeydown));
-    onUnmounted(() => window.removeEventListener("keydown", handleKeydown));
+    useWindowEvent("keydown", handleKeydown);
 
     return { currentNum, pressed, selectedOperation, prevNum };
   },

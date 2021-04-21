@@ -6,7 +6,14 @@
   <div class="absolute inset-0">
     <div class="flex h-full">
       <div class="m-auto z-30 bg-white rounded shadow p-2 w-1/3">
-        <div class="p-2 border"></div>
+        <div class="p-2 border">
+          <h1 class="text-2xl">
+            <slot name="title">Provide Some Data Here</slot>
+          </h1>
+          <main>
+              <slot name="body"></slot>
+          </main>
+        </div>
       </div>
     </div>
   </div>
@@ -14,9 +21,13 @@
 
 <script>
 export default {
-    setup(){
-        
+  setup(_, { emit }) {
+    function close() {
+      emit("close");
     }
+
+    return { close };
+  },
 };
 </script>
 
