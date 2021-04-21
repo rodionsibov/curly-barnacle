@@ -12,6 +12,7 @@
         <button>7</button>
         <button>8</button>
         <button>9</button>
+        <button>0</button>
       </div>
     </div>
   </section>
