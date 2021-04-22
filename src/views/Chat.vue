@@ -1,7 +1,23 @@
 <template>
-  <section>
-    <div v-for="chat in state.chats" :key="chat.message">
-      {{ chat.message }}
+  <section class="flex w-full">
+    <div class="m-auto">
+      <h1 class="text-center text-2xl">Real Time Chat</h1>
+      <div class="border rounded-lg">
+        <div class="h-64 p-2">
+          <div v-for="chat in state.chats" :key="chat.message">
+            {{ chat.message }}
+          </div>
+        </div>
+        <div class="h-8 p-2">
+          <input
+            class="p-1 border rounded shadow"
+            v-model="state.message"
+            type="text"
+            placeholder="Start typing..."
+            @keydown.enter="addMessage"
+          />
+        </div>
+      </div>
     </div>
   </section>
 </template>
@@ -13,20 +29,28 @@ export default {
   setup() {
     const state = reactive({
       chats: {},
+      message: "",
+      collection: null,
     });
 
     onMounted(async () => {
       const db = firebase.database();
-      const collection = db.ref("chats");
-      const data = await collection.once("value");
+      state.collection = db.ref("chats");
+      const data = await state.collection.once("value");
       state.chats = data.val();
 
-      collection.on("value", (snapshot) => {
+      state.collection.on("value", (snapshot) => {
         state.chats = snapshot.val();
       });
     });
 
-    return { state };
+    function addMessage() {
+      const newChat = state.collection.push()
+      newChat.set({ message: state.message });
+      state.message = "";
+    }
+
+    return { state, addMessage };
   },
 };
 </script>
