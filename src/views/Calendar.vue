@@ -1,6 +1,6 @@
 <template>
   <div class="m-auto">
-    <h1 class="text-2xl my-5 text-center">Vue Calendar</h1>
+    <h1 class="text-2xl my-6 text-center">Vue Calendar</h1>
     <section class="mx-4 flex justify-between">
       <h1 class="font-bold">
         {{ currentMonthName }}

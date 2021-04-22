@@ -1,6 +1,6 @@
 <template>
   <div class="m-auto">
-    <h1 class="text-2xl text-center mt-8">Dc Heros {{ herosCount }}</h1>
+    <h1 class="text-2xl text-center my-6">Dc Heros {{ herosCount }}</h1>
     <ul>
       <li
         class="flex justify-between"

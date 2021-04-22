@@ -1,7 +1,7 @@
 <template>
   <section class="flex flex-wrap w-full">
     <div class="m-auto">
-      <h1 class="text-2xl my-5">Reuseable Modal</h1>
+      <h1 class="text-2xl my-6">Reuseable Modal</h1>
 
       <modal v-if="isModal1Open" @close="isModal1Open = false">
         <template v-slot:title>Modal 1</template>

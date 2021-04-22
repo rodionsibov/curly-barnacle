@@ -3,7 +3,7 @@
     <div class="m-auto">
       <h1 class="text-2xl mt-5 text-center">Calculator</h1>
       <p
-        class="text-3xl text-right mt-10 overflow-x-scroll overflow-y-hidden"
+        class="text-3xl text-right mt-6 overflow-x-scroll overflow-y-hidden"
         style="direction: rtl; width: 172px; height: 50px"
       >
         {{ currentNum }}

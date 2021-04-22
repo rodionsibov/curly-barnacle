@@ -1,7 +1,7 @@
 <template>
   <section class="flex w-full">
     <div class="m-auto">
-      <h1 class="text-center text-2xl">Real Time Chat</h1>
+      <h1 class="text-center text-2xl my-6">Real Time Chat</h1>
       <div class="border rounded-lg">
         <div class="h-64 p-2">
           <div v-for="chat in state.chats" :key="chat.message">
