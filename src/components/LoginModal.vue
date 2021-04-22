@@ -64,7 +64,6 @@ export default {
   },
   emits: ["close-login"],
   methods: {
-    
     close() {
       this.$emit("close-login");
     },

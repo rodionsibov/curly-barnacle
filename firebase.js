@@ -13,5 +13,6 @@ const firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+export const chatsRef = firebase.database().ref("chats")
 
 export default firebase

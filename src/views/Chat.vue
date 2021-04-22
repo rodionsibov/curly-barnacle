@@ -3,8 +3,12 @@
     <div class="m-auto">
       <h1 class="text-center text-2xl my-6">Real Time Chat</h1>
       <div class="border rounded-lg">
-        <div class="h-64 p-2">
-          <div v-for="chat in state.chats" :key="chat.message">
+        <div class="h-64 p-2 overflow-y-scroll">
+          <div
+            v-for="chat in state.chats"
+            :key="chat.message"
+            :class="chat.userId === state.userId ? 'text-right' : ''"
+          >
             {{ chat.message }}
           </div>
         </div>
@@ -24,29 +28,25 @@
 
 <script>
 import { onMounted, reactive } from "vue";
-import firebase from "../../firebase";
+import firebase, { chatsRef } from "../../firebase";
 export default {
   setup() {
     const state = reactive({
-      chats: {},
+      chats: [],
       message: "",
-      collection: null,
+      userId: null,
     });
 
-    onMounted(async () => {
-      const db = firebase.database();
-      state.collection = db.ref("chats");
-      const data = await state.collection.once("value");
-      state.chats = data.val();
-
-      state.collection.on("value", (snapshot) => {
-        state.chats = snapshot.val();
+    onMounted(() => {
+      chatsRef.on("child_added", (snapshot) => {
+        state.userId = firebase.auth().currentUser.uid;
+        state.chats.push({ key: snapshot.key, ...snapshot.val() });
       });
     });
 
     function addMessage() {
-      const newChat = state.collection.push()
-      newChat.set({ message: state.message });
+      const newChat = chatsRef.push();
+      newChat.set({ userId: state.userId, message: state.message });
       state.message = "";
     }
 
