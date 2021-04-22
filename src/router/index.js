@@ -41,6 +41,11 @@ const routes = [
     path: '/reuseable-modal',
     component: () => import('../views/ReuseableModal.vue'),
     meta: {title: 'Reuseable Modal'}
+  },
+  {
+    path: '/chat',
+    component: () => import('../views/Chat'),
+    meta: {title: 'Chat'}
   }
 ]
 
