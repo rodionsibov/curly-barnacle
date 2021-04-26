@@ -1,3 +1,8 @@
 export default function (next, store) {
-    !store.state.isLoggedIn ? next('/') : next()
+    if (!store.state.isLoggedIn) {
+        next('/')
+        store.commit('setLoginModal', true)
+    } else {
+        next()
+    }
 }

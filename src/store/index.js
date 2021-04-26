@@ -4,6 +4,7 @@ export default createStore({
   state: {
     isLoggedIn: false,
     authUser: {},
+    isLoginOpen: false,
   },
   mutations: {
     setIsLoggedIn(state, payload) {
@@ -11,6 +12,9 @@ export default createStore({
     },
     setAuthUser(state, payload) {
       state.authUser = payload
+    },
+    setLoginModal(state, payload) {
+      state.isLoginOpen = payload
     }
   },
   actions: {

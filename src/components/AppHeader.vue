@@ -19,7 +19,7 @@
     </button>
     <button
       v-else
-      @click="$emit('open-login-modal')"
+      @click="openLogin"
       class="hvr-underline-reveal mx-3 align-middle"
     >
       Login
@@ -45,11 +45,14 @@ export default {
     };
   },
   computed: {
-    isLoggedIn(){
-      return this.$store.state.isLoggedIn
-    }
+    isLoggedIn() {
+      return this.$store.state.isLoggedIn;
+    },
   },
   methods: {
+    openLogin() {
+      this.$store.commit("setLoginModal", true);
+    },
     logout() {
       firebase
         .auth()
