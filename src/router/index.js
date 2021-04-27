@@ -45,8 +45,13 @@ const routes = [
   },
   {
     path: '/chat',
-    component: () => import('../views/Chat'),
+    component: () => import('../views/Chat.vue'),
     meta: { title: 'Chat', middleware: 'auth' }
+  },
+  {
+    path: '/user-crud',
+    component: () => import('../views/UserCrud.vue'),
+    meta: { title: 'User Crud' }
   }
 ]
 
