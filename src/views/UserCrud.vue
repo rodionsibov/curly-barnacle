@@ -2,12 +2,7 @@
   <section class="flex w-full">
     <div class="m-auto">
       <div class="mt-10">
-        <button
-          class="px-2 py-1 border rounded my-4"
-          @click="isModalOpen = true"
-        >
-          Add User
-        </button>
+        <create @new-user-added="AddUser" />
         <table>
           <thead>
             <tr>
@@ -15,6 +10,7 @@
               <th class="px-4 py-2 border">Avatar</th>
               <th class="px-4 py-2 border">Name</th>
               <th class="px-4 py-2 border">Email</th>
+              <th class="px-4 py-2 border">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -30,6 +26,14 @@
               </td>
               <td class="border px-4 py-2">{{ user.name }}</td>
               <td class="border px-4 py-2">{{ user.email }}</td>
+              <td class="border px-4 py-2">
+                <button
+                  class="px-2 py-1 bg-red-800 rounded text-white"
+                  @click="destroy(user._id)"
+                >
+                  Delete
+                </button>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -58,73 +62,26 @@
       </div>
     </div>
   </section>
-  <teleport to="body">
-    <modal v-if="isModalOpen" @close="isModalOpen = false">
-      <template #title> Add New User </template>
-      <template #body>
-        <form @submit.prevent="submit">
-          <div class="p-2">
-            <label for="">Name</label>
-            <input
-              class="w-full p-2 rounded border"
-              type="text"
-              placeholder="User Name"
-              v-model="state.form.name"
-            />
-          </div>
-          <div class="p-2">
-            <label for="">Email</label>
-            <input
-              class="w-full p-2 rounded border"
-              type="email"
-              placeholder="User Email"
-              v-model="state.form.email"
-            />
-          </div>
-          <div class="p-2">
-            <label for="">Avatar</label>
-            <input
-              class="w-full p-2 rounded border"
-              type="text"
-              placeholder="Avatar Url"
-              v-model="state.form.avatar"
-            />
-          </div>
-          <div class="p-2">
-            <input
-              class="w-full p-2 rounded border hover:bg-gray-300"
-              type="submit"
-              value="Create"
-            />
-          </div>
-        </form>
-      </template>
-    </modal>
-  </teleport>
 </template>
 
 <script>
-import { onMounted, reactive, ref } from "vue";
-import Modal from "../components/Modal";
+import { onMounted, reactive } from "vue";
+import Create from "../components/Create";
+
 export default {
   components: {
-    Modal,
+    Create,
   },
   setup() {
-    const isModalOpen = ref(false);
     const state = reactive({
       users: [],
-      form: {
-        name: "",
-        email: "",
-        avatar: "",
-      },
     });
 
     onMounted(async () => {
       const res = await fetch(`${process.env.VUE_APP_API_URL}/users`);
       const data = await res.json();
       state.users = data;
+      console.log(data);
     });
 
     async function next() {
@@ -139,25 +96,22 @@ export default {
       state.users = data;
     }
 
-    async function submit() {
-      const res = await fetch(`${process.env.VUE_APP_API_URL}/users`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(state.form),
-      });
-      const data = await res.json()
-      console.log(data);
-      state.users.push(data);
-      state.form.name = "";
-      state.form.email = "";
-      state.form.avatar = "";
-      isModalOpen.value = false
-
+    async function destroy(id) {
+      if (confirm("Are you sure?")) {
+        const res = await fetch(`${process.env.VUE_APP_API_URL}/users/${id}`, {
+          method: "DELETE",
+        });
+        res.status === 200
+          ? (state.users = state.users.filter((user) => user._id !== id))
+          : alert("Error deleting task");
+      }
     }
 
-    return { state, next, prev, isModalOpen, submit };
+    function addUser(data) {
+      state.users = [...state.users, data];
+    }
+
+    return { state, next, prev, destroy, addUser };
   },
 };
 </script>
