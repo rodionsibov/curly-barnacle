@@ -1,6 +1,6 @@
 <template>
   <app-header />
-  <div class="w-11/12 flex m-auto overflow-x-scroll sm:overflow-auto">
+  <div class="w-full m-auto">
     <router-view />
   </div>
   <teleport to="body">

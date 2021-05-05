@@ -5,7 +5,7 @@
   ></section>
   <div class="absolute inset-0">
     <div class="flex h-full">
-      <div class="m-auto z-30 bg-white rounded shadow p-2 w-1/3">
+      <div class="m-auto z-30 bg-white rounded shadow p-2 w-11/12 sm:w-1/3">
         <div class="p-2 border">
           <h1 class="text-2xl">
             <slot name="title">Provide Some Data Here</slot>

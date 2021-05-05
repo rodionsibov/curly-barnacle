@@ -1,5 +1,5 @@
 <template>
-  <div class="m-auto">
+  <div class="m-auto w-10/12 sm:w-1/2">
     <h1 class="text-2xl text-center my-6">Dc Heros {{ herosCount }}</h1>
     <ul>
       <li
