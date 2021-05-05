@@ -14,8 +14,8 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="user in state.users" :key="user._id">
-              <td class="border px-4 py-2">{{ user._id }}</td>
+            <tr v-for="user in state.users.data" :key="user.id">
+              <td class="border px-4 py-2">{{ user.id }}</td>
               <td class="border px-4 py-2">
                 <img
                   :src="user.avatar"
@@ -24,12 +24,14 @@
                   class="rounded-full"
                 />
               </td>
-              <td class="border px-4 py-2">{{ user.name }}</td>
+              <td class="border px-4 py-2">
+                {{ user.first_name }} {{ user.last_name }}
+              </td>
               <td class="border px-4 py-2">{{ user.email }}</td>
               <td class="border px-4 py-2">
                 <button
                   class="px-2 py-1 bg-red-800 rounded text-white"
-                  @click="destroy(user._id)"
+                  @click="destroy(user.id)"
                 >
                   Delete
                 </button>
@@ -101,8 +103,9 @@ export default {
         const res = await fetch(`${process.env.VUE_APP_API_URL}/users/${id}`, {
           method: "DELETE",
         });
+        console.log(state.users.data);
         res.status === 200
-          ? (state.users = state.users.filter((user) => user._id !== id))
+          ? (state.users.data = state.users.data.filter((user) => user.id !== id))
           : alert("Error deleting task");
       }
     }
