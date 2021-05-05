@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-full bg-gradient-to-r from-blue-800 to-blue-600 text-white px-4 py-2"
+    class="w-full bg-gradient-to-r from-blue-800 to-blue-600 text-white px-4 py-4 flex flex-col items-center text-2xl sm:text-base sm:block"
   >
     <router-link
       class="hvr-underline-reveal mx-3 align-middle"

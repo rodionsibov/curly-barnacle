@@ -6,7 +6,7 @@
     ></section>
     <div class="absolute inset-0">
       <div class="flex h-full">
-        <div class="m-auto z-30 bg-white rounded shadow p-2">
+        <div class="m-auto z-30 bg-white rounded shadow p-2 w-11/12 sm:w-auto">
           <div class="p-2 border">
             <h1 class="text-2xl text-center">Login</h1>
             <google-login @close-login-from-google="close" />
