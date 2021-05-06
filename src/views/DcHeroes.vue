@@ -22,7 +22,7 @@
         ref="newHeroRef"
       />
       <button
-        class="border rounded font-bold shadow-md bg-gradient-to-r from-green-900 to-green-600 text-white py-1 px-2 ml-1"
+        class="border rounded font-bold shadow-md bg-gradient-to-b from-green-900 to-green-600 hover:to-green-700 text-white py-1 px-2 sm:m-0 sm:ml-1 mt-2"
         type="submit"
       >
         Add Hero
