@@ -15,7 +15,7 @@
     </ul>
     <form class="mt-5" @submit.prevent="addHero">
       <input
-        class="border rounded p-1 w-full md:w-1/3 ml-2"
+        class="border rounded p-1 w-full md:w-1/3 mr-2"
         type="text"
         v-model="newHero"
         placeholder="type hero name here"
