@@ -15,14 +15,14 @@
     </ul>
     <form class="mt-5" @submit.prevent="addHero">
       <input
-        class="border rounded p-1"
+        class="border rounded p-1 w-full"
         type="text"
         v-model="newHero"
         placeholder="type hero name here"
         ref="newHeroRef"
       />
       <button
-        class="border rounded font-bold shadow-md bg-gradient-to-b from-green-900 to-green-600 hover:to-green-700 text-white py-1 px-2 sm:m-0 sm:ml-1 mt-2 m-auto"
+        class="border rounded font-bold shadow-md bg-gradient-to-b from-green-900 to-green-600 hover:to-green-700 text-white py-1 px-2 sm:m-0 sm:ml-1 mt-2"
         type="submit"
       >
         Add Hero
